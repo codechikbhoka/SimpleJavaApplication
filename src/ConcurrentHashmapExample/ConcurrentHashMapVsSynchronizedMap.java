@@ -17,18 +17,23 @@ public class ConcurrentHashMapVsSynchronizedMap {
     public final static int THREAD_POOL_SIZE = 5;
 
     public static Map<String, Integer> hashTableObject = null;
-    public static Map<String, Integer> synchronizedMapObject = null;
+    public static Map<String, Integer> synchronizedHashMapObject = null;
+    public static Map<String, Integer> normalHashMapObject = null;
     public static Map<String, Integer> concurrentHashMapObject = null;
 
     public static void main(String[] args) throws InterruptedException {
 
-        // Test with Hashtable Object
+        // Test with old Hashtable Object
         hashTableObject = new Hashtable<>();
         performTest(hashTableObject);
 
-        // Test with synchronizedMap Object
-        synchronizedMapObject = Collections.synchronizedMap(new HashMap<>());
-        performTest(synchronizedMapObject);
+        // Test with synchronized HashMap Object
+        synchronizedHashMapObject = Collections.synchronizedMap(new HashMap<>());
+        performTest(synchronizedHashMapObject);
+
+        // Test with normal (without any synchronisation) HashMap Object
+        normalHashMapObject = new HashMap<>();
+        performTest(normalHashMapObject);
 
         // Test with ConcurrentHashMap Object
         concurrentHashMapObject = new ConcurrentHashMap<>();
